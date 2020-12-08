@@ -15,6 +15,10 @@
     minute: "2-digit",
     // second: "2-digit",
   });
+  const users = [
+    { name: "John", surname: "Doe", avatar: "john doe.jpeg" },
+    { name: "Jane", surname: "Doe", avatar: "jane doe.png" },
+  ];
 </script>
 
 <style>
@@ -37,11 +41,11 @@
   }
 
   #home-logo {
-    padding: 8px;
+    /* padding: 8px; */
     border-radius: 3px;
     color: white;
-    background: var(--lightblue);
-    max-height: 50px;
+    /* background: var(--lightblue); */
+    height: auto;
   }
 
   .right {
@@ -99,17 +103,19 @@
   <title>Projet / accueil</title>
 </svelte:head>
 <Topbar>
-  <i id="home-logo" class="left fas fa-home fa-fw fa-3x" />
+  <div>
+    <i id="home-logo" class="text-center bg-primary fas fa-home fa-fw fa-3x" />
+  </div>
   <figure class="right">
-    <img src="john doe.jpeg" alt="photo id" width="48" />
-    <figcaption>{name} {surname}</figcaption>
+    <img src={users[1].avatar} alt="photo id" width="48" />
+    <figcaption>{users[1].name} {users[1].surname}</figcaption>
   </figure>
 </Topbar>
 <div class="panel">
   <p id="welcome">
     Bienvenue
-    <span class="name">{name}</span>, pense à tes avis pour notre futur. Belle
-    journée!
+    <span class="name">{users[1].name}</span>, pense à tes avis pour notre
+    futur. Belle journée!
   </p>
   <div class="menu">
     <Box
@@ -130,7 +136,7 @@
 </div>
 
 <!-- <h1>Projet</h1> -->
-<footer>
+<footer class="fixed-bottom">
   <p>
     dernière connexion:
     {formatter.format(date)}<br />
