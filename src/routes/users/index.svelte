@@ -6,6 +6,7 @@
   const name = "Jean";
   const surname = "Dupont";
   const date = new Date();
+  export let user;
   const formatter = new Intl.DateTimeFormat("fr", {
     year: "numeric",
     month: "short",
@@ -16,8 +17,24 @@
     // second: "2-digit",
   });
   const users = [
-    { name: "John", surname: "Doe", avatar: "john doe.jpeg" },
-    { name: "Jane", surname: "Doe", avatar: "jane doe.png" },
+    {
+      name: "John",
+      surname: "Doe",
+      email: "john-doe@foo.com",
+      avatar: "john doe.jpeg",
+    },
+    {
+      name: "Jane",
+      surname: "Doe",
+      email: "jane-doe@foo.com",
+      avatar: "jane doe.png",
+    },
+    {
+      name: "Svelte",
+      surname: "JS",
+      email: "sveltejs@dev.io",
+      avatar: "logo-512.png",
+    },
   ];
 </script>
 
@@ -107,14 +124,14 @@
     <i id="home-logo" class="text-center bg-primary fas fa-home fa-fw fa-3x" />
   </div>
   <figure class="right">
-    <img src={users[1].avatar} alt="photo id" width="48" />
-    <figcaption>{users[1].name} {users[1].surname}</figcaption>
+    <img src={users[2].avatar} alt="photo id" width="48" />
+    <figcaption>{users[2].name} {users[2].surname}</figcaption>
   </figure>
 </Topbar>
 <div class="panel">
   <p id="welcome">
     Bienvenue
-    <span class="name">{users[1].name}</span>, pense à tes avis pour notre
+    <span class="name">{users[2].name}</span>, pense à tes avis pour notre
     futur. Belle journée!
   </p>
   <div class="menu">
