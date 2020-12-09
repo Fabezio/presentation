@@ -2,8 +2,12 @@
   import { createEventDispatcher } from "svelte";
   import Topbar from "./Topbar.svelte";
   const dispatch = createEventDispatcher();
+  let name = "";
+  let surname = "";
+  let avatar = "";
   let email = "";
   let password = "";
+  let repeat_password = "";
 </script>
 
 <style>
@@ -26,26 +30,38 @@
   <div class="close">&times;</div>
 </Topbar> -->
 <div class="container">
-  <h1>S'identifier</h1>
-  <p>
-    ou
-    <a href="signup">s'inscrire sur <span class="brand">Projet</span></a>
-  </p>
+  <h1>S'inscrire</h1>
+  <p>ou <a href=".">se connecter sur <span class="brand">Projet</span></a></p>
   <form action="">
+    <input
+      class="form-control mb-2"
+      type="text"
+      bind:value={name}
+      placeholder="Prénom" />
+    <input
+      class="form-control mb-2"
+      type="text"
+      bind:value={surname}
+      placeholder="nom" />
     <input
       class="form-control mb-2"
       type="email"
       bind:value={email}
       placeholder="E-mail" />
     <input
-      class="form-control px-2"
+      class="form-control mb-2 px-2"
       type="password"
       bind:value={password}
       placeholder="Mot de passe" />
+    <input
+      class="form-control px-2"
+      type="password"
+      bind:value={repeat_password}
+      placeholder="Répétez mot de passe" />
     <a
       href="users"
       class="btn-lg btn-primary d-block text-center my-2"
-      type="submit">S'identifier</a>
+      type="submit">S'inscrire</a>
   </form>
   <a id="forgotten-password" href="#">Mot de passe oublié?</a>
   <button

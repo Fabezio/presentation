@@ -1,10 +1,15 @@
 <script>
-  import successkid from "images/successkid.jpg";
-  import { space } from "svelte/internal";
+  import { onMount } from "svelte";
   import Box from "../../components/Box.svelte";
   import Topbar from "../../components/Topbar.svelte";
-  const name = "Jean";
-  const surname = "Dupont";
+  let state = "loading";
+  onMount(() => {
+    setTimeout(() => {
+      state = "ready";
+      return state;
+    }, 100);
+  });
+
   const date = new Date();
   // export let user;
   const formatter = new Intl.DateTimeFormat("fr", {
@@ -17,6 +22,12 @@
     // second: "2-digit",
   });
   const users = [
+    {
+      name: "Diana",
+      surname: "Assal",
+      email: "test@msg.info",
+      avatar: "ethic.png",
+    },
     {
       name: "John",
       surname: "Doe",
@@ -36,7 +47,7 @@
       avatar: "logo-512.png",
     },
   ];
-  export let user = users[1];
+  export let user = users[0];
 </script>
 
 <style>
@@ -66,10 +77,6 @@
     height: auto;
   }
 
-  .right {
-    /* float: right; */
-    padding: 4px;
-  }
   figcaption {
     text-transform: capitalize;
   }
@@ -90,26 +97,6 @@
     padding: 2rem;
   }
 
-  .txt-lg {
-    font-size: 1.1rem;
-  }
-
-  .blue {
-    color: var(--lightblue);
-  }
-
-  .bold {
-    font-weight: bold;
-  }
-  .left-align {
-    text-align: left;
-  }
-  /* footer {
-    display: block;
-    position: absolute;
-    bottom: O;
-    height: 2.5rem;
-  } */
   footer p {
     /* display: block; */
     /* text-align: left; */
@@ -120,51 +107,64 @@
 <svelte:head>
   <title>Projet / accueil</title>
 </svelte:head>
-
-<Topbar>
-  <li class="nav-item">
-    <i id="home-logo" class="text-center bg-primary fas fa-home fa-fw fa-3x" />
-  </li>
-  <li>
-    <figure class="">
-      <img src={user.avatar} alt="photo id" width="48" />
-      <figcaption>{user.name} {user.surname}</figcaption>
-    </figure>
-  </li>
-  <!-- <slot /> -->
-</Topbar>
-<!-- <Topbar>
-</Topbar> -->
-<div class="panel">
-  <p id="welcome">
-    Bienvenue
-    <span class="name">{user.name}</span>, pense à tes avis pour notre futur.
-    Belle journée!
-  </p>
-  <div class="menu">
-    <Box
-      tag="3"
-      mode="rounded bg-blue white"
-      url="#"
-      icon="far fa-calendar-alt" />
-
-    <Box tag="7" mode="rounded bg-blue white" url="#" icon="far fa-bell" />
-    <Box mode="rounded" url="#" icon="fas fa-chart-line" />
-    <Box url="#" icon="fas fa-qrcode" />
-    <Box url="#" icon="fas fa-search" />
-    <Box url="#" icon="fas fa-pen-nib" />
-    <Box url="#" icon="fas fa-lock" />
-    <Box url="#" icon="far fa-user" />
-    <Box url="." icon="fas fa-power-off" />
+{#if state == 'loading'}
+  <div class=" d-flex justify-content-center justify-items-center ">
+    <div class="spinner-border text-success lead" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   </div>
-</div>
+{:else}
+  <Topbar>
+    <li class="nav-item">
+      <i
+        id="home-logo"
+        class="text-center bg-primary fas fa-home fa-fw fa-3x" />
+    </li>
+    <li>
+      <figure class="">
+        <img src={user.avatar} alt="photo id" width="48" />
+        <figcaption>{user.name} {user.surname}</figcaption>
+      </figure>
+    </li>
+    <!-- <slot /> -->
+  </Topbar>
+  <!-- <Topbar>
+</Topbar> -->
+  <div class="container">
+    <p id="welcome">
+      Bienvenue
+      <span class="name">{user.name}</span>, pense à tes avis pour notre futur.
+      Belle journée!
+    </p>
+    <div class="menu">
+      <Box
+        tag="3"
+        mode="rounded-pill bg-primary text-white"
+        url="#"
+        icon="far fa-calendar-alt" />
 
-<!-- <h1>Projet</h1> -->
-<div class="" />
-<footer class="sticky-bottom">
-  <p>
-    dernière connexion:
-    {formatter.format(date)}<br />
-    <span class="blue bold txt-lg left-align indent">projet</span>
-  </p>
-</footer>
+      <Box
+        tag="7"
+        mode="rounded-pill bg-primary text-white"
+        url="#"
+        icon="far fa-bell" />
+      <Box url="#" icon="fas fa-chart-line" />
+      <Box url="#" icon="fas fa-qrcode" />
+      <Box url="#" icon="fas fa-search" />
+      <Box url="#" icon="fas fa-pen-nib" />
+      <Box url="#" icon="fas fa-lock" />
+      <Box url="#" icon="far fa-user" />
+      <Box url="." icon="fas fa-power-off" />
+    </div>
+  </div>
+
+  <!-- <h1>Projet</h1> -->
+  <div class="" />
+  <footer class="fixed-bottom   ">
+    <p>
+      dernière connexion:
+      {formatter.format(date)}<br />
+      <span class="text-primary text-bold text-left ">projet</span>
+    </p>
+  </footer>
+{/if}

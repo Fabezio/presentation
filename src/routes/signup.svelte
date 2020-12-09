@@ -1,7 +1,8 @@
 <script>
+  import SignupForm from "./../components/SignupForm.svelte";
   // import Topbar from "../components/Topbar.svelte";
   import CloseApp from "../components/CloseApp.svelte";
-  import Login from "../components/Login.svelte";
+  //   import SignupForm from "../components/SignupForm.svelte";
 
   const users = [
     {
@@ -44,8 +45,8 @@
 <style>
 </style>
 
-<Login on:closeApp={closeApp} />
-<!-- {#if display == 'close'}
+{#if display == 'close'}
   <CloseApp />
-  
-{/if} -->
+{:else if display == 'login'}
+  <SignupForm on:closeApp={closeApp} />
+{/if}
